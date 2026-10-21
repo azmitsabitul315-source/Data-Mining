@@ -1,0 +1,75 @@
+PENJELASAN PROYEK ANALISIS DATA RESERVASI HOTEL
+
+Pada latihan kali ini saya merangkum apa saja yang saya pelajari dari Course 1,
+mulai dari cara membaca file CSV, memeriksa data, menangani nilai yang hilang,
+hingga membuat visualisasi dan mengubah skala fitur.
+
+TUJUAN PROYEK
+
+Proyek ini merupakan latihan Exploratory Data Analysis (EDA) dan data cleaning
+menggunakan contoh data reservasi hotel. Program membaca data dari file
+data_reservasi_hotel.csv, lalu menunjukkan beberapa langkah dasar untuk
+memahami dan menyiapkan data. Proyek ini tidak membuat atau menguji model
+prediksi.
+
+DATA YANG DIGUNAKAN
+
+Dataset berisi 100 contoh reservasi dengan kolom:
+- id_reservasi: nomor identitas reservasi.
+- tipe_kamar: kategori kamar Standard, Deluxe, atau Suite.
+- lama_menginap_hari: lama tamu menginap dalam hari.
+- total_tagihan_rp: jumlah tagihan dalam rupiah.
+
+Data ini merupakan data simulasi yang dibuat oleh program, bukan data
+reservasi hotel sungguhan. Program membuat beberapa nilai lama menginap kosong
+dan dua nilai tagihan yang sengaja dibuat sangat tinggi sebagai contoh outlier.
+
+TAHAPAN YANG DILAKUKAN
+
+1. Membuat dan membaca dataset
+   Program membuat data contoh menggunakan pandas dan numpy, menyimpannya ke
+   CSV, lalu membaca kembali file tersebut menggunakan pandas. Karena datanya
+   dibuat secara acak, isi CSV dapat berubah ketika program dijalankan ulang.
+
+2. Eksplorasi data
+   Program menampilkan statistik ringkas melalui describe() dan histogram
+   total tagihan. Statistik dan grafik membantu melihat gambaran umum data serta
+   distribusi nilai tagihan.
+
+3. Mengambil sampel
+   Program memilih lima baris secara acak untuk meninjau sebagian isi dataset.
+
+4. Menangani nilai yang hilang
+   Program menghitung jumlah nilai kosong pada setiap kolom. Nilai kosong pada
+   lama_menginap_hari kemudian diisi dengan median kolom tersebut agar baris
+   tetap dapat digunakan tanpa mengisi nilai berdasarkan nilai ekstrem.
+
+5. Mendeteksi dan menangani outlier
+   Program menghitung kuartil pertama (Q1), kuartil ketiga (Q3), dan IQR.
+   Nilai total_tagihan_rp di luar batas Q1 - 1,5 x IQR hingga Q3 + 1,5 x IQR
+   ditandai sebagai outlier dan barisnya dikeluarkan dari data hasil
+   pembersihan. Pada data contoh, tagihan ekstrem sengaja ditambahkan untuk
+   mempraktikkan langkah ini.
+
+6. Membuat fitur dan mengubah kategori
+   Program membuat fitur biaya_per_malam dengan membagi total tagihan dengan
+   lama menginap. Kolom tipe_kamar diubah menjadi beberapa kolom numerik
+   menggunakan one-hot encoding melalui get_dummies().
+
+7. Mengubah skala fitur
+   StandardScaler digunakan untuk menstandarkan biaya_per_malam, sedangkan
+   MinMaxScaler digunakan untuk mengubah total_tagihan_rp ke rentang 0 sampai 1.
+   Hasil pengolahan ditampilkan dalam lima baris pertama.
+
+8. Visualisasi akhir
+   Program membuat boxplot dari tagihan yang sudah dinormalisasi untuk membantu
+   melihat sebaran nilainya setelah outlier dikeluarkan.
+
+KESIMPULAN
+
+Melalui latihan ini, saya belajar membaca dan mengeksplorasi file CSV,
+memeriksa nilai yang hilang, mengisi nilai kosong dengan median, mendeteksi
+outlier menggunakan metode IQR, membuat fitur baru, mengubah data kategori
+menjadi angka, serta melakukan standardisasi dan normalisasi. Hasil akhirnya
+adalah data yang sudah diproses dan ditampilkan untuk keperluan latihan
+analisis data.
